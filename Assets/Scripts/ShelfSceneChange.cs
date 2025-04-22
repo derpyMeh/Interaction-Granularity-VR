@@ -7,41 +7,38 @@ public class ShelfSceneChange : MonoBehaviour
 {
     [SerializeField] private string bookTag = "Book";
     [SerializeField] private string mainSceneName = "Interaction Scene";
-    [SerializeField] private string bookSceneName = "Test";
-    
+
     private bool isChangingScene = false;
-    private bool bookIsInShelf = true; // Start in shelf by default
+    private bool bookIsInShelf = true;
 
     private void OnTriggerExit(Collider other)
     {
-        if (isChangingScene == false && other.CompareTag(bookTag))
-        {
-            isChangingScene = true;
-            Debug.Log("Book removed from shelf — loading book scene!");
+        if (isChangingScene || !other.CompareTag(bookTag)) return;
 
-<<<<<<< Updated upstream
         if (bookIsInShelf)
         {
             bookIsInShelf = false;
             isChangingScene = true;
 
-            Debug.Log("Book exited shelf — going to book scene");
-            PreparePersistentObjects(other.gameObject);
-            SceneManager.LoadScene(bookSceneName);
-=======
-            PreparePersistentObjects(other.gameObject);
-            SceneManager.LoadScene(bookSceneName);
+            var bookSceneRef = other.GetComponent<BookSceneReference>();
+            if (bookSceneRef == null)
+            {
+                Debug.LogWarning("Book is missing a BookSceneReference component!");
+                return;
+            }
 
->>>>>>> Stashed changes
+            string targetScene = bookSceneRef.targetSceneName;
+
+            Debug.Log("Book exited shelf — loading scene: " + targetScene);
+            PreparePersistentObjects(other.gameObject);
+            SceneManager.LoadScene(targetScene);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isChangingScene == true && other.CompareTag(bookTag))
-        {
+        if (isChangingScene || !other.CompareTag(bookTag)) return;
 
-<<<<<<< Updated upstream
         if (!bookIsInShelf)
         {
             bookIsInShelf = true;
@@ -49,12 +46,6 @@ public class ShelfSceneChange : MonoBehaviour
 
             Debug.Log("Book returned to shelf — returning to main scene");
             PreparePersistentObjects(other.gameObject);
-=======
-            isChangingScene = false;
-            Debug.Log("Book returned to shelf — going back to main scene!");
-
-            //PreparePersistentObjects(other.gameObject);
->>>>>>> Stashed changes
             SceneManager.LoadScene(mainSceneName);
         }
     }
@@ -63,10 +54,11 @@ public class ShelfSceneChange : MonoBehaviour
     {
         DontDestroyOnLoad(book);
 
-        //GameObject xrRig = GameObject.Find("XR Origin (XR Rig)");
         GameObject bookshelf = GameObject.Find("bookshelf");
-
-        //if (xrRig != null) DontDestroyOnLoad(xrRig);
         if (bookshelf != null) DontDestroyOnLoad(bookshelf);
+
+        // Uncomment if needed:
+        // GameObject xrRig = GameObject.Find("XR Origin (XR Rig)");
+        // if (xrRig != null) DontDestroyOnLoad(xrRig);
     }
 }
