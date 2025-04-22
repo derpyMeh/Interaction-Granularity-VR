@@ -1888,7 +1888,7 @@ GameObject:
   - component: {fileID: 941732316}
   - component: {fileID: 941732315}
   m_Layer: 0
-  m_Name: ShelfZone (1)
+  m_Name: ShelfZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1923,7 +1923,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bookTag: Book
   mainSceneName: Interaction Scene
-  bookSceneName: Test
 --- !u!65 &941732316
 BoxCollider:
   m_ObjectHideFlags: 0
