@@ -1007,7 +1007,7 @@ MonoBehaviour:
   m_OriginBaseGameObject: {fileID: 180649425}
   m_CameraFloorOffsetObject: {fileID: 1379779715}
   m_RequestedTrackingOriginMode: 0
-  m_CameraYOffset: 1.17
+  m_CameraYOffset: 0.8
 --- !u!4 &180649428
 Transform:
   m_ObjectHideFlags: 0
@@ -1017,7 +1017,7 @@ Transform:
   m_GameObject: {fileID: 180649425}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.07, z: 0}
+  m_LocalPosition: {x: 0, y: -0.026, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1790,12 +1790,12 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 1.1277202, z: 1.4980474}
+  m_Center: {x: 0, y: 0.06386012, z: -0.0026948452}
 --- !u!23 &577271630
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3936,7 +3936,7 @@ Transform:
   m_GameObject: {fileID: 1963185887}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.636, y: 1.007, z: -1.998}
+  m_LocalPosition: {x: 0.636, y: 1.014, z: -1.998}
   m_LocalScale: {x: 0.1, y: 0.5, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children: []

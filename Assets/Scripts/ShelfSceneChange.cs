@@ -14,8 +14,12 @@ public class ShelfSceneChange : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (isChangingScene || !other.CompareTag(bookTag)) return;
+        if (isChangingScene == false && other.CompareTag(bookTag))
+        {
+            isChangingScene = true;
+            Debug.Log("Book removed from shelf — loading book scene!");
 
+<<<<<<< Updated upstream
         if (bookIsInShelf)
         {
             bookIsInShelf = false;
@@ -24,13 +28,20 @@ public class ShelfSceneChange : MonoBehaviour
             Debug.Log("Book exited shelf — going to book scene");
             PreparePersistentObjects(other.gameObject);
             SceneManager.LoadScene(bookSceneName);
+=======
+            PreparePersistentObjects(other.gameObject);
+            SceneManager.LoadScene(bookSceneName);
+
+>>>>>>> Stashed changes
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isChangingScene || !other.CompareTag(bookTag)) return;
+        if (isChangingScene == true && other.CompareTag(bookTag))
+        {
 
+<<<<<<< Updated upstream
         if (!bookIsInShelf)
         {
             bookIsInShelf = true;
@@ -38,6 +49,12 @@ public class ShelfSceneChange : MonoBehaviour
 
             Debug.Log("Book returned to shelf — returning to main scene");
             PreparePersistentObjects(other.gameObject);
+=======
+            isChangingScene = false;
+            Debug.Log("Book returned to shelf — going back to main scene!");
+
+            //PreparePersistentObjects(other.gameObject);
+>>>>>>> Stashed changes
             SceneManager.LoadScene(mainSceneName);
         }
     }
@@ -46,10 +63,10 @@ public class ShelfSceneChange : MonoBehaviour
     {
         DontDestroyOnLoad(book);
 
-        GameObject xrRig = GameObject.Find("XR Origin (XR Rig)");
+        //GameObject xrRig = GameObject.Find("XR Origin (XR Rig)");
         GameObject bookshelf = GameObject.Find("bookshelf");
 
-        if (xrRig != null) DontDestroyOnLoad(xrRig);
+        //if (xrRig != null) DontDestroyOnLoad(xrRig);
         if (bookshelf != null) DontDestroyOnLoad(bookshelf);
     }
 }
