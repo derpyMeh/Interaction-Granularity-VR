@@ -9,6 +9,7 @@ public class SceneChanger : MonoBehaviour
 {
 
  [SerializeField] private string targetSceneName = "Test"; // Destination scene
+    
     private bool hasChangedScene = false;
 
     private void OnEnable()
@@ -24,6 +25,7 @@ public class SceneChanger : MonoBehaviour
     private void OnGrabbed(SelectEnterEventArgs args)
     {
         if (hasChangedScene) return;
+
         hasChangedScene = true;
 
         GameObject xrRig = GameObject.Find("XR Origin (XR Rig)");
@@ -31,6 +33,11 @@ public class SceneChanger : MonoBehaviour
 
         // Persist important objects across scenes
         DontDestroyOnLoad(gameObject); // the book
+
+        
+        var bookshelf = GameObject.Find("bookshelf");
+        var xrRig = GameObject.Find("XR Origin (XR Rig)");
+
         if (xrRig != null) DontDestroyOnLoad(xrRig);
         if (bookshelf != null) DontDestroyOnLoad(bookshelf);
 
