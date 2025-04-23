@@ -1,79 +1,75 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class ShelfSceneChange : MonoBehaviour
 {
     [SerializeField] private string bookTag = "Book";
-    [SerializeField] private string mainSceneName = "Interaction Scene";
 
-    private static bool justSwitchedScene = false; // survives across scene reload
+    private float sceneStartTime;
+    private float triggerEnterDelay = 1f;
     private static float lastSwitchTime = -999f;
     private const float cooldown = 1.5f;
 
-    private GameObject lastBookEntered;
-    private float sceneStartTime;
-    private float triggerEnterDelay = 1f; // or tweak this as needed
-
     private void Start()
-{
-    sceneStartTime = Time.time;
-}
+    {
+        sceneStartTime = Time.time;
+    }
 
     private void OnTriggerExit(Collider other)
     {
         if (!other.CompareTag(bookTag)) return;
-        if (justSwitchedScene && Time.time - lastSwitchTime < cooldown) return;
+
+        // Only proceed if the book is currently held
+        if (BookGrabTracker.currentlyHeldBook != other.gameObject)
+        {
+            Debug.Log("Book exited, but it's not being held — ignoring.");
+            return;
+        }
+
+        if (Time.time - lastSwitchTime < cooldown) return;
 
         var bookSceneRef = other.GetComponent<BookSceneReference>();
-        if (bookSceneRef == null) return;
+        var bookID = other.GetComponent<BookID>();
+        if (bookSceneRef == null || bookID == null) return;
 
-        justSwitchedScene = true;
         lastSwitchTime = Time.time;
 
-        Debug.Log("Book exited shelf — loading scene: " + bookSceneRef.targetSceneName);
-        PreparePersistentObjects(other.gameObject);
-        SceneManager.LoadScene(bookSceneRef.targetSceneName);
+        Debug.Log($"Book '{bookID.bookID}' exited shelf — loading scene: {bookSceneRef.targetSceneName}");
+
+        // When book is picked up and scene is about to change
+        BookVisibilityManager.Instance?.ShowOnlyBook(bookID.bookID);
+
+        // Load the corresponding book scene
+        var controller = FindObjectOfType<BookSceneController>();
+        controller?.LoadBookScene(bookSceneRef.targetSceneName);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-    if (!other.CompareTag(bookTag)) return;
+        if (Time.time - sceneStartTime < triggerEnterDelay) return;
+        if (!other.CompareTag(bookTag)) return;
 
-    if (BookGrabTracker.currentlyHeldBook != other.gameObject)
-    {
-        Debug.Log("Book entered, but it's not the active/held one.");
-        return;
-    }
+        // Only switch back if it's the currently held book returning
+        if (BookGrabTracker.currentlyHeldBook != other.gameObject)
+        {
+            Debug.Log("Book entered, but it's not the active/held one — ignoring.");
+            return;
+        }
 
-    if (Time.time - sceneStartTime < triggerEnterDelay)
-    {
-        Debug.Log("Entered too early after scene load");
-        return;
-    }
+        if (Time.time - lastSwitchTime < cooldown)
+        {
+            Debug.Log("Cooldown still active — skipping return.");
+            return;
+        }
 
-    if (justSwitchedScene && Time.time - lastSwitchTime < cooldown)
-    {
-        Debug.Log("Cooldown still active");
-        return;
-    }
+        lastSwitchTime = Time.time;
 
-    justSwitchedScene = true;
-    lastSwitchTime = Time.time;
+        Debug.Log("Book returned to shelf — unloading book scene");
 
-    Debug.Log("Book returned — loading main scene");
-    PreparePersistentObjects(other.gameObject);
-    SceneManager.LoadScene(mainSceneName);
-    }
+        // When returning to interaction scene
+        BookVisibilityManager.Instance?.ShowAllBooks();
 
-    private void PreparePersistentObjects(GameObject book)
-    {
-        DontDestroyOnLoad(book);
-
-        GameObject bookshelf = GameObject.Find("bookshelf");
-        if (bookshelf != null) DontDestroyOnLoad(bookshelf);
-
-        // Optional:
-        // GameObject xrRig = GameObject.Find("XR Origin (XR Rig)");
-        // if (xrRig != null) DontDestroyOnLoad(xrRig);
+        ///Reload the Interaction Scene
+        var controller = FindObjectOfType<BookSceneController>();
+        controller?.ReturnToInteractionScene();
     }
 }

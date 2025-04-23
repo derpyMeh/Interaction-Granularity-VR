@@ -29,10 +29,17 @@ public class BookGrabTracker : MonoBehaviour
     private void OnGrabbed(SelectEnterEventArgs args)
     {
         currentlyHeldBook = this.gameObject;
+
+        // Notify manager
+        BookShelfGroupManager.Instance?.OnBookGrabbed(this.gameObject);
     }
 
     private void OnReleased(SelectExitEventArgs args)
     {
         currentlyHeldBook = null;
+
+        // Notify manager
+        BookShelfGroupManager.Instance?.OnBookReleased(this.gameObject);
     }
+
 }
