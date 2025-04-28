@@ -9,6 +9,7 @@ public class ShelfSceneChange : MonoBehaviour
     private static float lastSwitchTime = -999f;
     private const float cooldown = 1.5f;
 
+
     private void Start()
     {
         sceneStartTime = Time.time;
@@ -48,6 +49,7 @@ public class ShelfSceneChange : MonoBehaviour
         if (Time.time - sceneStartTime < triggerEnterDelay) return;
         if (!other.CompareTag(bookTag)) return;
 
+        var bookSceneRef = other.GetComponent<BookSceneReference>();
         // Only switch back if it's the currently held book returning
         if (BookGrabTracker.currentlyHeldBook != other.gameObject)
         {
@@ -70,6 +72,6 @@ public class ShelfSceneChange : MonoBehaviour
 
         ///Reload the Interaction Scene
         var controller = FindObjectOfType<BookSceneController>();
-        controller?.ReturnToInteractionScene();
+        controller?.ReturnToInteractionScene(bookSceneRef.targetSceneName);
     }
 }

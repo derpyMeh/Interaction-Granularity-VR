@@ -1,10 +1,15 @@
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
 public class BookSceneController : MonoBehaviour
 {
     [SerializeField] private string interactionSceneName = "Interaction Scene";
+    List<string> loadedScenes = new List<string>();
+
+    //[SerializeField] private string mainSceneName = "Main";
+
     private string currentBookScene = "";
 
     public void LoadBookScene(string bookSceneName)
@@ -12,12 +17,22 @@ public class BookSceneController : MonoBehaviour
         StartCoroutine(SwitchToBookScene(bookSceneName));
     }
 
-    public void ReturnToInteractionScene()
+    public void ReturnToInteractionScene(string bookSceneName)
     {
-        if (!string.IsNullOrEmpty(currentBookScene))
+        if (!string.IsNullOrEmpty(bookSceneName))
         {
-            SceneManager.UnloadSceneAsync(currentBookScene);
-            currentBookScene = "";
+            if (loadedScenes.Contains(bookSceneName))
+            {
+                Debug.Log($"Unloading book scene: {bookSceneName}");
+                SceneManager.UnloadSceneAsync(bookSceneName);
+                loadedScenes.Remove(bookSceneName);
+
+                if (currentBookScene == bookSceneName)
+                {
+                    currentBookScene = "";
+                }
+            }
+
         }
 
         if (!SceneManager.GetSceneByName(interactionSceneName).isLoaded)
@@ -46,6 +61,12 @@ public class BookSceneController : MonoBehaviour
         {
             SceneManager.SetActiveScene(loadedScene);
             currentBookScene = newBookScene;
+
+            if (!loadedScenes.Contains(newBookScene))
+            {
+                loadedScenes.Add(newBookScene); // Save the newly loaded scene
+            }
+
         }
     }
 }
