@@ -5,12 +5,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class BookHandReattach : MonoBehaviour
 {
-    private XRGrabInteractable grab;
-    private IXRSelectInteractor previousInteractor;
+    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grab;
+    private UnityEngine.XR.Interaction.Toolkit.Interactors.IXRSelectInteractor previousInteractor;
 
     void Awake()
     {
-        grab = GetComponent<XRGrabInteractable>();
+        grab = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
         grab.selectEntered.AddListener(OnGrabbed);
         grab.selectExited.AddListener(OnReleased);
     }
