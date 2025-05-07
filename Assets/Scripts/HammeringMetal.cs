@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class HammeringMetal : MonoBehaviour
 {
@@ -16,7 +16,7 @@ public class HammeringMetal : MonoBehaviour
 
     public GameObject chainObj;
     public GameObject ingotObj;
-    public XRBaseInteractor interactor;
+    public UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor interactor;
     [SerializeField] GameObject hammerObj;
 
     public Transform slotPosition; 
@@ -54,7 +54,7 @@ public class HammeringMetal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(ingotTag) && other.GetComponent<XRGrabInteractable>() != null)
+        if (other.CompareTag(ingotTag) && other.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>() != null)
         {
             PlaceInSlot(other.transform);
             Debug.Log("placed slot");
@@ -88,7 +88,7 @@ public class HammeringMetal : MonoBehaviour
     private void PlaceInSlot(Transform objectTransform)
     {
         // Optionally disable the physics and interactions for the object when placed
-        XRGrabInteractable grabInteractable = objectTransform.GetComponent<XRGrabInteractable>();
+        UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = objectTransform.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
         Rigidbody objectRigidbody = objectTransform.GetComponent<Rigidbody>();
 
         // Stop the object from moving freely once placed in the slot
@@ -110,7 +110,7 @@ public class HammeringMetal : MonoBehaviour
     }
     private void ForgeTest()
     {
-        Vector3 controllerVelocity = interactor.GetComponent<Rigidbody>().velocity;
+        Vector3 controllerVelocity = interactor.GetComponent<Rigidbody>().linearVelocity;
         Debug.Log(controllerVelocity.magnitude);
 
         if (Time.time - lastSwingTime > swingCd && ingotPlaced && hammerInside)

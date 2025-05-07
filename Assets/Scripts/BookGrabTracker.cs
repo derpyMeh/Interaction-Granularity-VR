@@ -7,11 +7,11 @@ public class BookGrabTracker : MonoBehaviour
 {
   public static GameObject currentlyHeldBook = null;
 
-    private XRGrabInteractable grab;
+    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grab;
 
     private void Awake()
     {
-        grab = GetComponent<XRGrabInteractable>();
+        grab = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
     }
 
     private void OnEnable()

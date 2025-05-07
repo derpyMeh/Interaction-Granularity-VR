@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+
 
 public class SlotLogic : MonoBehaviour
 {
@@ -23,7 +23,7 @@ public class SlotLogic : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object has the correct tag and is interactable
-        if (other.CompareTag(ingotTag) && other.GetComponent<XRGrabInteractable>() != null)
+        if (other.CompareTag(ingotTag) && other.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>() != null)
         {
             PlaceInSlot(other.transform);
             Debug.Log("placed slot");
@@ -33,7 +33,7 @@ public class SlotLogic : MonoBehaviour
     private void PlaceInSlot(Transform objectTransform)
     {
         // Optionally disable the physics and interactions for the object when placed
-        XRGrabInteractable grabInteractable = objectTransform.GetComponent<XRGrabInteractable>();
+        UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = objectTransform.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
         Rigidbody objectRigidbody = objectTransform.GetComponent<Rigidbody>();
 
         // Stop the object from moving freely once placed in the slot
