@@ -4,12 +4,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class BookPhysicsLocker : MonoBehaviour
 {
     private Rigidbody rb;
-    private XRGrabInteractable grab;
+    private UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grab;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        grab = GetComponent<XRGrabInteractable>();
+        grab = GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
     }
 
     void OnEnable()
