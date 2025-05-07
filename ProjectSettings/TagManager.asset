@@ -5,10 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Book
-  - Ingot
-  - Hammer
-  - Right Hand
-  - Left Hand
   layers:
   - Default
   - TransparentFX
