@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class BootstrapLoader : MonoBehaviour
 {
-    [SerializeField] private string interactionSceneName = "Interaction Scene";
+    [SerializeField] private string interactionSceneName = "Forge";
 
     private void Awake()
     {
