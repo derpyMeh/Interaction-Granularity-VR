@@ -7,6 +7,9 @@ TagManager:
   - Book
   - Ingot
   - Hammer
+  - Right Hand
+  - Left Hand
+  - Ingredient
   layers:
   - Default
   - TransparentFX

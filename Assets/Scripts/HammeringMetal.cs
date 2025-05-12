@@ -1,5 +1,9 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 
 public class HammeringMetal : MonoBehaviour
@@ -14,7 +18,7 @@ public class HammeringMetal : MonoBehaviour
 
     public GameObject chainObj;
     public GameObject ingotObj;
-    public UnityEngine.XR.Interaction.Toolkit.Interactors.XRBaseInteractor interactor;
+    public XRBaseInteractor interactor;
     [SerializeField] GameObject hammerObj;
 
     public Transform slotPosition;
