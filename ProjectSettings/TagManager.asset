@@ -10,6 +10,7 @@ TagManager:
   - Right Hand
   - Left Hand
   - Ingredient
+  - Forge
   layers:
   - Default
   - TransparentFX

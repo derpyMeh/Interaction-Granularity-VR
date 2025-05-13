@@ -6,7 +6,6 @@ public class Combine : MonoBehaviour
     [SerializeField] List<GameObject> ingredientsList = new List<GameObject>();
     private string ingredientTag = "Ingredient";
 
-    private bool ingotActive = false;
     public GameObject objToActivate;
 
 
@@ -24,7 +23,6 @@ public class Combine : MonoBehaviour
 
     private void ActiveObj()
     {
-        ingotActive = true;
         objToActivate.SetActive(true);
         Debug.Log("✅ Activated: " + objToActivate.name);
 
