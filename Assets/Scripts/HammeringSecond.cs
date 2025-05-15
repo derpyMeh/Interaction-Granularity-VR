@@ -7,6 +7,7 @@ public class HammeringSecond : MonoBehaviour
     private string ingotTag = "Ingot";
 
     private Rigidbody hammerRB;
+    public AudioSource clinkAudio;
 
     private bool hammerInside = false;
     private bool ingotPlaced = false;
@@ -66,6 +67,7 @@ public class HammeringSecond : MonoBehaviour
         {
             hitThresh++;
             sparkEffect.Play();
+            clinkAudio.Play();
             hasSwung = true;
             lastSwingTime = swingCd;
 
