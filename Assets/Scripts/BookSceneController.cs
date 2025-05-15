@@ -5,7 +5,7 @@ using System.Collections;
 
 public class BookSceneController : MonoBehaviour
 {
-    [SerializeField] private string interactionSceneName = "Interaction Scene";
+    [SerializeField] private string interactionSceneName = "Ingredients world";
     List<string> loadedScenes = new List<string>();
 
     //[SerializeField] private string mainSceneName = "Main";
@@ -35,11 +35,11 @@ public class BookSceneController : MonoBehaviour
 
         }
 
-        if (!SceneManager.GetSceneByName(interactionSceneName).isLoaded)
-        {
-            Debug.Log("Reloading Interaction Scene...");
-            SceneManager.LoadSceneAsync(interactionSceneName, LoadSceneMode.Additive);
-        }
+        //if (!SceneManager.GetSceneByName(interactionSceneName).isLoaded)
+        //{
+        //    Debug.Log("Reloading Interaction Scene...");
+        //    SceneManager.LoadSceneAsync(interactionSceneName, LoadSceneMode.Additive);
+        //}
     }
 
 

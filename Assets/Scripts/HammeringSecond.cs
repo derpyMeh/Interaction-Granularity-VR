@@ -26,7 +26,7 @@ public class HammeringSecond : MonoBehaviour
     [SerializeField] int hitThresh;
 
 
-    private float velocityThreshold = 8.0f;
+    private float velocityThreshold = 5.0f;
     private float lastSwingTime = 0f;
     private float swingCd = 1.5f;
 
@@ -74,8 +74,6 @@ public class HammeringSecond : MonoBehaviour
                 hitThresh = 0;
 
                 ForgeTest();
-                // Hammer is swinging with sufficient velocity
-                Debug.Log("Swing detected with velocity: " + velocity);
             }
         }
 
@@ -140,11 +138,7 @@ public class HammeringSecond : MonoBehaviour
         objectTransform.rotation = slotPosition.rotation; // Optional: align rotation as well
 
         // Optionally disable interaction after placement
-        if (grabInteractable != null)
-        {
-            // Set the interaction layers to nothing (disable interaction)
-            grabInteractable.interactionLayers = 0;
-        } // Disable interaction
+   
     }
     private void ForgeTest()
     {
