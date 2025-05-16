@@ -16,7 +16,7 @@ public class IngredientEnabler : MonoBehaviour
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
         DontDestroyOnLoad(xrOrig);
@@ -53,6 +53,7 @@ public class IngredientEnabler : MonoBehaviour
             }
         }
     }
+
 
     private void OnEnable()
     {

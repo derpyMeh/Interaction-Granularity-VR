@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
@@ -5,11 +6,22 @@ using UnityEngine.XR.Interaction.Toolkit.Interactables;
 
 public class NewBookLogic : MonoBehaviour
 {
+    public GameObject spawnPos;
+    public GameObject playPos;
+    private bool inIngWorld = false;
+    private bool hasTriggered = false;
     private XRGrabInteractable grabbedInteract;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        grabbedInteract = GetComponent<XRGrabInteractable>();
+        GameObject target = GameObject.Find("XR Origin (XR Rig)");
+
+        if (target != null)
+        {
+            playPos = target;
+        }
+
+            grabbedInteract = GetComponent<XRGrabInteractable>();
         if (grabbedInteract != null)
         {
             grabbedInteract.selectEntered.AddListener(onBookPickup);
@@ -19,24 +31,50 @@ public class NewBookLogic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (SceneManager.GetActiveScene().name != "Forge 2")
+        {
+            if (!inIngWorld)
+            {
+                Debug.Log("Has Triggered");
+                playPos.transform.position = spawnPos.transform.position;
+                inIngWorld = true;
+            }
+        }
+        else
+        {
+            inIngWorld = false;
+        }
+        if (SceneManager.GetActiveScene().name != "Ingredients world")
+        {
+            if (!hasTriggered)
+            {
+                Debug.Log("Has Triggered");
+                playPos.transform.position = spawnPos.transform.position;
+                hasTriggered = true;
+            }
+        }
+        else
+        {
+            hasTriggered = false;
+        }
     }
+        
 
     private void onBookPickup(SelectEnterEventArgs args)
     {
         if (SceneManager.GetActiveScene().name == "Forge 2")
         {
             SceneManager.LoadScene("Ingredients world");
+            inIngWorld = true;
+            hasTriggered = false;
         }
         else
         {
             SceneManager.LoadScene("Forge 2");
+            inIngWorld = false;
+            hasTriggered = false;
         }
     }
 
-    private void OnEnable()
-    {
 
-       
-    }
 }

@@ -73,9 +73,9 @@ public class HammeringSecond : MonoBehaviour
 
             if (hitThresh >= 5)
             {
+                ForgeTest();
                 hitThresh = 0;
 
-                ForgeTest();
             }
         }
 

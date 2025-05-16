@@ -368,6 +368,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &168378858
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 168378859}
+  m_Layer: 0
+  m_Name: Spawn Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &168378859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 168378858}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &180920652
 GameObject:
   m_ObjectHideFlags: 0
@@ -8323,13 +8354,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1961614083}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.00093862414, y: -0.0010468066, z: -0.7063487, w: 0.7078627}
-  m_LocalPosition: {x: 2.0335922, y: 1.351, z: 4.464563}
-  m_LocalScale: {x: 1.35594, y: 1, z: 1}
+  m_LocalRotation: {x: -0.70709676, y: 0.010734992, z: -0.7069739, w: 0.009324149}
+  m_LocalPosition: {x: 4.605, y: 1.538, z: 2.309}
+  m_LocalScale: {x: 0.3679072, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -0.009, y: -0.161, z: -89.877}
+  m_LocalEulerAnglesHint: {x: 0.114, y: 90.012, z: -178.375}
 --- !u!114 &1961614095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8342,6 +8373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b152ab21540877c42bb162631f24f590, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnPos: {fileID: 168378858}
+  playPos: {fileID: 0}
 --- !u!1001 &1966131345
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8843,7 +8876,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 8b5724ad9005a5a48bbccadc0736e811, type: 3}
   m_Resource: {fileID: 8300000, guid: 8b5724ad9005a5a48bbccadc0736e811, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.05
+  m_Volume: 0.148
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -9170,3 +9203,4 @@ SceneRoots:
   - {fileID: 289471898}
   - {fileID: 687016493}
   - {fileID: 2128883915}
+  - {fileID: 168378859}

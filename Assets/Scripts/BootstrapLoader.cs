@@ -11,8 +11,9 @@ public class BootstrapLoader : MonoBehaviour
         if (!SceneManager.GetSceneByName(interactionSceneName).isLoaded)
         {
             Debug.Log($"Bootstrapping scene: {interactionSceneName}");
-            SceneManager.LoadSceneAsync(interactionSceneName, LoadSceneMode.Additive);
+            SceneManager.LoadScene(interactionSceneName);
 
         }
+        
     }
 }
