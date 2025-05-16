@@ -1,4 +1,5 @@
 using Mono.Cecil;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -29,7 +30,7 @@ public class IngredientEnabler : MonoBehaviour
     void Update()
     {
 
-        if (SceneManager.GetActiveScene().name == "Forge 2" && ingredientListNames.Count > 0)
+        if (SceneManager.GetActiveScene().name == "Forge 2" && ingredientListNames.Count > 0 && allIngredientList.Count <= 6)
         {
             Scene currentScene = SceneManager.GetActiveScene();
             Debug.Log("In " + SceneManager.GetActiveScene().name + "And Found " + ingredientListNames.Count + "Ingredients");
@@ -43,6 +44,12 @@ public class IngredientEnabler : MonoBehaviour
                     allIngredientList.Add(go);
                 }
             }
+
+            for (int i = 0; i < allIngredients.Length; i++)
+            {
+                allIngredients[i] = null;
+            }
+
             foreach (GameObject obj in allIngredientList)
             {
                 Debug.Log("Found " + obj.name);

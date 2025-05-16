@@ -5,21 +5,12 @@ public class Combine : MonoBehaviour
 {
     [SerializeField] List<GameObject> ingredientsList = new List<GameObject>();
     private string ingredientTag = "Ingredient";
+    private string coalTag = "Coal";
 
+    private bool coalInFurnace = false;
     public GameObject objToActivate;
-
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
-        
+    FireSoundPlayer fireSoundStarter;
+    public ParticleSystem fireStart;       
 
     private void ActiveObj()
     {
@@ -39,10 +30,16 @@ public class Combine : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag(coalTag))
+        {
+            coalInFurnace = true;
+            fireSoundStarter = GetComponent<FireSoundPlayer>();
+            fireStart.Play();
+            fireSoundStarter.isLit = true; 
 
-        
+        }
 
-        if (other.CompareTag(ingredientTag))
+        if (other.CompareTag(ingredientTag) && coalInFurnace)
         {
             GameObject ingredientObj = other.gameObject;
             if (!ingredientsList.Contains(ingredientObj))
