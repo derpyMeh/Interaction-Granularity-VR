@@ -13,6 +13,8 @@ public class IngredientEnabler : MonoBehaviour
     public GameObject xrIntMan;
     public List<string> ingredientListNames = new List<string>();
     private List<GameObject> allIngredientList = new List<GameObject>();
+    public GameObject poofObj;
+    public ParticleSystem poofParticle;
 
 
 
@@ -22,6 +24,7 @@ public class IngredientEnabler : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         DontDestroyOnLoad(xrOrig);
         DontDestroyOnLoad(xrIntMan);
+        DontDestroyOnLoad(poofObj);
 
 
     }
@@ -77,14 +80,18 @@ public class IngredientEnabler : MonoBehaviour
         //string grabbedObjName = args.interactableObject.transform.gameObject.name;
         GameObject grabbedObj = args.interactableObject.transform.gameObject;
 
-        if (grabbedObj.CompareTag("Ingredient") && SceneManager.GetActiveScene().name != "Forge 2")
+        if (grabbedObj.CompareTag("Ingredient") && SceneManager.GetActiveScene().name == "Ingredients world")
         {
+            
             if (!ingredientListNames.Contains(grabbedObj.name))
             {
+                poofObj.transform.position = grabbedObj.transform.position;
+                poofParticle.Play();
                 ingredientListNames.Add(grabbedObj.name);
                 Debug.Log("Added " + grabbedObj.name + "to list");
-                if (!grabbedObj == false)
-                {
+
+                if (!grabbedObj.activeInHierarchy == false)
+                {   
                     grabbedObj.SetActive(false);
                 }
             }

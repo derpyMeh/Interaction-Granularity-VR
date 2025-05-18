@@ -5742,7 +5742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clinkAudio: {fileID: 557458708}
-  chainObj: {fileID: 0}
+  chainObj: {fileID: 1668103396}
   ingotObj: {fileID: 777398861}
   sparkEffect: {fileID: 180920654}
   barLogic: {fileID: 777398865}
@@ -6700,13 +6700,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 800042520}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.2893436, z: -0, w: 0.9572254}
+  m_LocalRotation: {x: -0, y: -0.76276565, z: -0, w: 0.64667505}
   m_LocalPosition: {x: -2.876, y: 1.136, z: 1.992}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 33.637, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -99.417, z: 0}
 --- !u!1 &927624350
 GameObject:
   m_ObjectHideFlags: 0
