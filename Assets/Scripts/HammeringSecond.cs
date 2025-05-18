@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class HammeringSecond : MonoBehaviour
 {
     private string hammerTag = "Hammer";
     private string ingotTag = "Ingot";
 
-    private Rigidbody hammerRB;
     public AudioSource clinkAudio;
 
     private bool hammerInside = false;
@@ -18,7 +16,6 @@ public class HammeringSecond : MonoBehaviour
     public ParticleSystem sparkEffect;
 
     [SerializeField] BarLogic barLogic;
-    public XRBaseInteractor interactor;
     [SerializeField] GameObject hammerObj;
 
     public Transform slotPosition;
@@ -125,8 +122,6 @@ public class HammeringSecond : MonoBehaviour
 
     private void PlaceInSlot(Transform objectTransform)
     {
-        // Optionally disable the physics and interactions for the object when placed
-        UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = objectTransform.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
         Rigidbody objectRigidbody = objectTransform.GetComponent<Rigidbody>();
 
         // Stop the object from moving freely once placed in the slot
@@ -139,7 +134,6 @@ public class HammeringSecond : MonoBehaviour
         objectTransform.position = slotPosition.position;
         objectTransform.rotation = slotPosition.rotation; // Optional: align rotation as well
 
-        // Optionally disable interaction after placement
    
     }
     private void ForgeTest()

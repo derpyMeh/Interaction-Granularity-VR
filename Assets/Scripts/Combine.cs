@@ -10,8 +10,8 @@ public class Combine : MonoBehaviour
 
     private bool coalInFurnace = false;
     public GameObject objToActivate;
-    FireSoundPlayer fireSoundStarter;
-    public ParticleSystem fireStart;       
+    public FireSoundPlayer fireSoundStarter;
+    public GameObject fireStart;       
 
     private void ActiveObj()
     {
@@ -34,13 +34,13 @@ public class Combine : MonoBehaviour
         if (other.CompareTag(coalTag))
         {
             coalInFurnace = true;
-            fireSoundStarter = GetComponent<FireSoundPlayer>();
-            fireStart.Play();
+            Debug.Log("Coal in Furnace");
+            fireStart.SetActive(true);
             fireSoundStarter.isLit = true; 
 
         }
 
-        if (SceneManager.GetActiveScene().name == "Forge 1")
+        if (SceneManager.GetActiveScene().name == "Forge 1" || SceneManager.GetActiveScene().name == "Forge")
         {
 
             if (other.CompareTag(ingredientTag))
@@ -63,6 +63,7 @@ public class Combine : MonoBehaviour
             if (other.CompareTag(ingredientTag) && coalInFurnace)
             {
                 GameObject ingredientObj = other.gameObject;
+                Debug.Log("Ingredient " +  ingredientObj.name + " added");
                 if (!ingredientsList.Contains(ingredientObj))
                 {
                     ingredientsList.Add(ingredientObj);
@@ -70,6 +71,7 @@ public class Combine : MonoBehaviour
                     if (ingredientsList.Count >= 6)
                     {
                         ActiveObj();
+                        Debug.Log("Bar Spawned");
                     }
                 }
 
