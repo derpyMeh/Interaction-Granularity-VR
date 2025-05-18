@@ -144,10 +144,8 @@ public class HammeringSecond : MonoBehaviour
     }
     private void ForgeTest()
     {
-        Vector3 controllerVelocity = interactor.GetComponent<Rigidbody>().linearVelocity;
-        Debug.Log(controllerVelocity.magnitude);
-
-        if (Time.time - lastSwingTime > swingCd && ingotPlaced && hammerInside)
+        
+        if (ingotPlaced && hammerInside)
         {
             chainObj.SetActive(true);
             Destroy(ingotObj);
