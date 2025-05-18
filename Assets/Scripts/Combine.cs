@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Combine : MonoBehaviour
 {
@@ -39,19 +40,40 @@ public class Combine : MonoBehaviour
 
         }
 
-        if (other.CompareTag(ingredientTag) && coalInFurnace)
+        if (SceneManager.GetActiveScene().name == "Forge 1")
         {
-            GameObject ingredientObj = other.gameObject;
-            if (!ingredientsList.Contains(ingredientObj))
+
+            if (other.CompareTag(ingredientTag))
             {
-                ingredientsList.Add(ingredientObj);
-
-                if (ingredientsList.Count >= 6)
+                GameObject ingredientObj = other.gameObject;
+                if (!ingredientsList.Contains(ingredientObj))
                 {
-                    ActiveObj();
-                }
-            }
+                    ingredientsList.Add(ingredientObj);
 
+                    if (ingredientsList.Count >= 6)
+                    {
+                        ActiveObj();
+                    }
+                }
+
+            }
+        }
+        else if(SceneManager.GetActiveScene().name == "Forge 2")
+        {
+            if (other.CompareTag(ingredientTag) && coalInFurnace)
+            {
+                GameObject ingredientObj = other.gameObject;
+                if (!ingredientsList.Contains(ingredientObj))
+                {
+                    ingredientsList.Add(ingredientObj);
+
+                    if (ingredientsList.Count >= 6)
+                    {
+                        ActiveObj();
+                    }
+                }
+
+            }
         }
     }
 
