@@ -16,6 +16,7 @@ public class introCutsceneController : MonoBehaviour
     public Image screenImage;
     public TextMeshProUGUI subtitleText;
     public AudioSource voiceoverSource;
+    public GameObject orb;
 
     [System.Serializable]
     public class ImageCue
@@ -160,7 +161,7 @@ public class introCutsceneController : MonoBehaviour
             return;
         }
 
-        GameObject orb = Instantiate(orbPrefab, orbSpawnPoint.position, orbSpawnPoint.rotation);
+        orb.SetActive(true);
         var behavior = orb.GetComponent<SceneOrbBehavior>();
         if (behavior != null)
         {

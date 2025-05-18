@@ -9,6 +9,7 @@ public class SceneOrbBehavior : MonoBehaviour
     {
         if (other.CompareTag("PlayerHand") || other.CompareTag("MainCamera"))
         {
+            Debug.Log("Grabbed orb");
             string targetScene = controller.GetSelectedSceneName();
             controller.FadeAndLoadScene(targetScene);
         }

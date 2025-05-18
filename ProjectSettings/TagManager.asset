@@ -12,6 +12,7 @@ TagManager:
   - Ingredient
   - Forge
   - Coal
+  - PlayerHand
   layers:
   - Default
   - TransparentFX

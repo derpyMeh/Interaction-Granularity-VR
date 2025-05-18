@@ -13390,15 +13390,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182014491}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.017, y: 0.318, z: 0.02}
+  m_LocalRotation: {x: -0, y: 0.9999643, z: -0, w: 0.008455628}
+  m_LocalPosition: {x: 2.25, y: 0.318, z: -2.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1823025322}
   - {fileID: 1854002783}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.031, z: 0}
 --- !u!1001 &1232503766
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13621,6 +13621,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientsList: []
   objToActivate: {fileID: 777398861}
+  fireSoundStarter: {fileID: 0}
   fireStart: {fileID: 0}
 --- !u!65 &1384070369
 BoxCollider:
