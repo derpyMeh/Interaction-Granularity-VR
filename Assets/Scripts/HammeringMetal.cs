@@ -46,7 +46,7 @@ public class HammeringMetal : MonoBehaviour
         lastPosition = hammerObj.transform.position;
 
         // Only trigger if velocity exceeds threshold
-        if (velocity >= velocityThreshold)
+        if (velocity >= velocityThreshold && ingotPlaced && hammerInside)
         {
             ForgeTest();
             // Hammer is swinging with sufficient velocity
@@ -112,10 +112,8 @@ public class HammeringMetal : MonoBehaviour
     }
     private void ForgeTest()
     {
-        Vector3 controllerVelocity = interactor.GetComponent<Rigidbody>().linearVelocity;
-        Debug.Log(controllerVelocity.magnitude);
-
-        if (Time.time - lastSwingTime > swingCd && ingotPlaced && hammerInside)
+        
+        if (ingotPlaced && hammerInside)
         {
             chainObj.SetActive(true);
             Destroy(ingotObj);

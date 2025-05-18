@@ -77,7 +77,7 @@ public class IngredientEnabler : MonoBehaviour
         //string grabbedObjName = args.interactableObject.transform.gameObject.name;
         GameObject grabbedObj = args.interactableObject.transform.gameObject;
 
-        if (grabbedObj.CompareTag("Ingredient"))
+        if (grabbedObj.CompareTag("Ingredient") && SceneManager.GetActiveScene().name != "Forge 2")
         {
             if (!ingredientListNames.Contains(grabbedObj.name))
             {
