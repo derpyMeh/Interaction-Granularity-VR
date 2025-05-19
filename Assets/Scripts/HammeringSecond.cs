@@ -23,7 +23,7 @@ public class HammeringSecond : MonoBehaviour
 
     [SerializeField] int hitThresh;
 
-
+    private float velocity;
     private float velocityThreshold = 5.0f;
     private float lastSwingTime = 0f;
     private float swingCd = 1.5f;
@@ -50,14 +50,14 @@ public class HammeringSecond : MonoBehaviour
             //}
         }
 
-        
-        Vector3 deltaPosition = hammerObj.transform.position - lastPosition;
 
-        // Calculate the velocity (change in position over time)
-        float velocity = deltaPosition.magnitude / Time.deltaTime;
+        //Vector3 deltaPosition = hammerObj.transform.position - lastPosition;
 
-        // Update the last position for the next frame
-        lastPosition = hammerObj.transform.position;
+        //// Calculate the velocity (change in position over time)
+        //float velocity = deltaPosition.magnitude / Time.deltaTime;
+
+        //// Update the last position for the next frame
+        //lastPosition = hammerObj.transform.position;
 
         // Only trigger if velocity exceeds threshold
         if (!hasSwung && velocity >= velocityThreshold && barLogic.barHeat > 0.2 && ingotPlaced && hammerInside)
@@ -85,6 +85,16 @@ public class HammeringSecond : MonoBehaviour
             }
         }
 
+    }
+    private void FixedUpdate()
+    {
+        Vector3 deltaPosition = hammerObj.transform.position - lastPosition;
+
+        // Calculate the velocity (change in position over time)
+        //float velocity = deltaPosition.magnitude / Time.deltaTime;
+
+        // Update the last position for the next frame
+        lastPosition = hammerObj.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -134,11 +144,11 @@ public class HammeringSecond : MonoBehaviour
         objectTransform.position = slotPosition.position;
         objectTransform.rotation = slotPosition.rotation; // Optional: align rotation as well
 
-   
+
     }
     private void ForgeTest()
     {
-        
+
         if (ingotPlaced && hammerInside)
         {
             chainObj.SetActive(true);
