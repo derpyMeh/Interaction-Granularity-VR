@@ -36,7 +36,7 @@ public class FootstepsLogic : MonoBehaviour
         }
         else
         {
-            footstepTimer = 0f; // reset timer when not moving
+            footstepSource.Stop();
         }
     }
 }
