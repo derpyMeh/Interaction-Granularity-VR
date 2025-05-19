@@ -2893,7 +2893,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 51d5855dc7c297a4ab579df3f0eb9687, type: 3}
   m_Resource: {fileID: 8300000, guid: 51d5855dc7c297a4ab579df3f0eb9687, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.31
+  m_Volume: 0.03
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -13956,7 +13956,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeGroup: {fileID: 1389825961}
   fadeImgObject: {fileID: 1389825957}
-  screenEffectObj: {fileID: 0}
+  screenEffectObj: {fileID: 1213135680}
+  xrOrig: {fileID: 1199568810}
 --- !u!1001 &1966131345
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -40,7 +40,7 @@ public class Combine : MonoBehaviour
 
         }
 
-        if (SceneManager.GetActiveScene().name == "Forge 1" || SceneManager.GetActiveScene().name == "Forge")
+        if (SceneManager.GetActiveScene().name == "Forge 1" || SceneManager.GetActiveScene().name == "Forge" || SceneManager.GetActiveScene().name == "Forge Level 1" || SceneManager.GetActiveScene().name == "Forge Level 2")
         {
 
             if (other.CompareTag(ingredientTag))
@@ -58,7 +58,7 @@ public class Combine : MonoBehaviour
 
             }
         }
-        else if(SceneManager.GetActiveScene().name == "Forge 2")
+        else if(SceneManager.GetActiveScene().name == "Forge 2" || SceneManager.GetActiveScene().name == "Forge Level 3")
         {
             if (other.CompareTag(ingredientTag) && coalInFurnace)
             {

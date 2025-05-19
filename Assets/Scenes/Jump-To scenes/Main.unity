@@ -2368,6 +2368,7 @@ MonoBehaviour:
   fadeGroup: {fileID: 2103818132}
   fadeImgObject: {fileID: 2103818130}
   screenEffectObj: {fileID: 519927590}
+  xrOrig: {fileID: 500797102}
 --- !u!114 &1419813791
 MonoBehaviour:
   m_ObjectHideFlags: 0

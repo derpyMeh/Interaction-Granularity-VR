@@ -23,10 +23,10 @@ public class HammeringSecond : MonoBehaviour
 
     [SerializeField] int hitThresh;
 
-    private float velocity;
+
     private float velocityThreshold = 5.0f;
     private float lastSwingTime = 0f;
-    private float swingCd = 1.5f;
+    private float swingCd = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -50,18 +50,19 @@ public class HammeringSecond : MonoBehaviour
             //}
         }
 
+        
+        Vector3 deltaPosition = hammerObj.transform.position - lastPosition;
 
-        //Vector3 deltaPosition = hammerObj.transform.position - lastPosition;
+        // Calculate the velocity (change in position over time)
+        float velocity = deltaPosition.magnitude / Time.deltaTime;
 
-        //// Calculate the velocity (change in position over time)
-        //float velocity = deltaPosition.magnitude / Time.deltaTime;
-
-        //// Update the last position for the next frame
-        //lastPosition = hammerObj.transform.position;
+        // Update the last position for the next frame
+        lastPosition = hammerObj.transform.position;
 
         // Only trigger if velocity exceeds threshold
         if (!hasSwung && velocity >= velocityThreshold && barLogic.barHeat > 0.2 && ingotPlaced && hammerInside)
         {
+            Debug.Log("Player Swung");
             hitThresh++;
             sparkEffect.Play();
             clinkAudio.Play();
@@ -85,16 +86,6 @@ public class HammeringSecond : MonoBehaviour
             }
         }
 
-    }
-    private void FixedUpdate()
-    {
-        Vector3 deltaPosition = hammerObj.transform.position - lastPosition;
-
-        // Calculate the velocity (change in position over time)
-        //float velocity = deltaPosition.magnitude / Time.deltaTime;
-
-        // Update the last position for the next frame
-        lastPosition = hammerObj.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -144,11 +135,11 @@ public class HammeringSecond : MonoBehaviour
         objectTransform.position = slotPosition.position;
         objectTransform.rotation = slotPosition.rotation; // Optional: align rotation as well
 
-
+   
     }
     private void ForgeTest()
     {
-
+        
         if (ingotPlaced && hammerInside)
         {
             chainObj.SetActive(true);

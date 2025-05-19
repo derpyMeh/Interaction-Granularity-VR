@@ -62,6 +62,7 @@ public class NewBookLogic : MonoBehaviour
 
     private void onBookPickup(SelectEnterEventArgs args)
     {
+        grabbedInteract.interactionLayers = 0;
         if (SceneManager.GetActiveScene().name == "Forge 2")
         {
 

@@ -272,8 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3149d6b25994ef84f85d0bf247a5fcb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interactor: {fileID: 0}
-  xrOrig: {fileID: 0}
+  Interactor: {fileID: 1547381838}
+  xrOrig: {fileID: 500797102}
   xrIntMan: {fileID: 738712597}
   ingredientListNames: []
   poofObj: {fileID: 486343912}
@@ -2367,7 +2367,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeGroup: {fileID: 2103818132}
   fadeImgObject: {fileID: 2103818130}
-  screenEffectObj: {fileID: 0}
+  screenEffectObj: {fileID: 519927590}
+  xrOrig: {fileID: 500797102}
 --- !u!114 &1419813791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3504,6 +3505,6 @@ SceneRoots:
   - {fileID: 1243223690}
   - {fileID: 164124736}
   - {fileID: 500797111}
-  - {fileID: 1419813792}
   - {fileID: 78208448}
+  - {fileID: 1419813792}
   - {fileID: 519927591}

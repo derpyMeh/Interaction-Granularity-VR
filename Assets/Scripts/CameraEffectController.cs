@@ -7,11 +7,12 @@ public class CameraEffectController : MonoBehaviour
     public CanvasGroup fadeGroup;     // assign the CanvasGroup on FadeImg
     public GameObject fadeImgObject;  // assign the FadeImg GameObject
     public GameObject screenEffectObj;
-
+    public GameObject xrOrig;
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
         DontDestroyOnLoad(screenEffectObj);
+        DontDestroyOnLoad(xrOrig);
         fadeImgObject.SetActive(false);     // hide on startup
     }
 
