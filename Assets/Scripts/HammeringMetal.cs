@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 
@@ -18,7 +20,7 @@ public class HammeringMetal : MonoBehaviour
 
     public GameObject chainObj;
     public GameObject ingotObj;
-    public XRBaseInteractor interactor;
+    public XRGrabInteractable interactor;
     [SerializeField] GameObject hammerObj;
 
     public Transform slotPosition;
@@ -52,6 +54,8 @@ public class HammeringMetal : MonoBehaviour
             // Hammer is swinging with sufficient velocity
             Debug.Log("Swing detected with velocity: " + velocity);
         }
+
+       
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,6 +78,8 @@ public class HammeringMetal : MonoBehaviour
 
     }
 
+    
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(hammerTag))
@@ -86,6 +92,8 @@ public class HammeringMetal : MonoBehaviour
             ingotPlaced = false;
         }
     }
+
+   
 
     private void PlaceInSlot(Transform objectTransform)
     {
