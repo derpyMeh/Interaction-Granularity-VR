@@ -6,10 +6,12 @@ public class CameraEffectController : MonoBehaviour
 {
     public CanvasGroup fadeGroup;     // assign the CanvasGroup on FadeImg
     public GameObject fadeImgObject;  // assign the FadeImg GameObject
+    public GameObject screenEffectObj;
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject); // optional if you want this to persist
+        DontDestroyOnLoad(this.gameObject);
+        DontDestroyOnLoad(screenEffectObj);
         fadeImgObject.SetActive(false);     // hide on startup
     }
 
@@ -20,6 +22,7 @@ public class CameraEffectController : MonoBehaviour
 
     private IEnumerator FadeOutAndLoad(string sceneName, float fadeDuration)
     {
+
         fadeImgObject.SetActive(true); // enable black image
         yield return Fade(0f, 1f, fadeDuration); // fade to black
 

@@ -11,7 +11,11 @@ public class SceneOrbBehavior : MonoBehaviour
         {
             Debug.Log("Grabbed orb");
             string targetScene = controller.GetSelectedSceneName();
-            controller.FadeAndLoadScene(targetScene);
+            CameraEffectController cam = FindObjectOfType<CameraEffectController>();
+            if (cam != null)
+            {
+                cam.FadeToScene(targetScene, 5f);
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ public class ChainPickUp : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public XRGrabInteractable chainInteractable;
 
+
     void Start()
     {
         if (chainInteractable != null)
@@ -18,7 +19,13 @@ public class ChainPickUp : MonoBehaviour
 
     private void OnChainPickup(SelectEnterEventArgs args)
     {
-        SceneManager.LoadScene("OutroCutscene");
+        CameraEffectController cam = FindObjectOfType<CameraEffectController>();
+        if (cam != null)
+        {
+            Debug.Log("Beginning Fade");
+            cam.FadeToScene("OutroCutscene", 5f);
+        }
+
     }
 
     private void OnDestroy()

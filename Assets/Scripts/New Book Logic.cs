@@ -64,7 +64,12 @@ public class NewBookLogic : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Forge 2")
         {
-            SceneManager.LoadScene("Ingredients world");
+
+            CameraEffectController cam = FindObjectOfType<CameraEffectController>();
+            if (cam != null)
+            {
+                cam.FadeToScene("Ingredients world", 2f);
+            }
             inIngWorld = true;
             hasTriggered = false;
         }
