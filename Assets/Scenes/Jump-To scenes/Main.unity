@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f15a58d45ec44854d8220333a9a4ce6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactionSceneName: Forge 2
+  interactionSceneName: IntroCutscene
 --- !u!4 &83183035
 Transform:
   m_ObjectHideFlags: 0
@@ -272,8 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3149d6b25994ef84f85d0bf247a5fcb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Interactor: {fileID: 0}
-  xrOrig: {fileID: 0}
+  Interactor: {fileID: 1547381838}
+  xrOrig: {fileID: 500797102}
   xrIntMan: {fileID: 738712597}
   ingredientListNames: []
   poofObj: {fileID: 486343912}
@@ -1169,7 +1169,7 @@ GameObject:
   - component: {fileID: 584177224}
   m_Layer: 0
   m_Name: Left Controller
-  m_TagString: Untagged
+  m_TagString: PlayerHand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2367,7 +2367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeGroup: {fileID: 2103818132}
   fadeImgObject: {fileID: 2103818130}
-  screenEffectObj: {fileID: 0}
+  screenEffectObj: {fileID: 519927590}
 --- !u!114 &1419813791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2448,7 +2448,7 @@ GameObject:
   - component: {fileID: 1547381836}
   m_Layer: 0
   m_Name: Right Controller
-  m_TagString: Untagged
+  m_TagString: PlayerHand
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
