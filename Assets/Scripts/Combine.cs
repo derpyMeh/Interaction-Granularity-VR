@@ -11,38 +11,38 @@ public class Combine : MonoBehaviour
     private bool coalInFurnace = false;
     public GameObject objToActivate;
     public FireSoundPlayer fireSoundStarter;
-    public GameObject fireStart;       
+    public GameObject fireStart;
 
+    // Activates the target object and deactivates all other objects in the ingredientsList
     private void ActiveObj()
     {
         objToActivate.SetActive(true);
-        Debug.Log("✅ Activated: " + objToActivate.name);
 
         foreach (GameObject obj in ingredientsList)
         {
-            Debug.Log("✅ Inactivated: " + obj.name);
             obj.SetActive(false);
-
         }
-
-
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        // If the object that entered has the "coal" tag, mark the furnace as lit
         if (other.CompareTag(coalTag))
         {
             coalInFurnace = true;
-            Debug.Log("Coal in Furnace");
+
+            // Activate visual fire and mark the fire sound trigger
             fireStart.SetActive(true);
             fireSoundStarter.isLit = true; 
-
         }
 
-        if (SceneManager.GetActiveScene().name == "Forge 1" || SceneManager.GetActiveScene().name == "Forge" || SceneManager.GetActiveScene().name == "Forge Level 1" || SceneManager.GetActiveScene().name == "Forge Level 2")
+        // Check which scene the player is in
+        if (SceneManager.GetActiveScene().name == "Forge 1" ||
+            SceneManager.GetActiveScene().name == "Forge" ||
+            SceneManager.GetActiveScene().name == "Forge Level 1" ||
+            SceneManager.GetActiveScene().name == "Forge Level 2")
         {
-
+            //Check if object in collider has the ingredient tag, if it does, add it to the ingredient list if it hasn't already been, then call the ActiveObj method
             if (other.CompareTag(ingredientTag))
             {
                 GameObject ingredientObj = other.gameObject;
@@ -58,20 +58,24 @@ public class Combine : MonoBehaviour
 
             }
         }
-        else if(SceneManager.GetActiveScene().name == "Forge 2" || SceneManager.GetActiveScene().name == "Forge Level 3")
+
+        // For Forge 2 and Forge Level 3, only allow ingredient collection if the furnace is lit
+        else if (SceneManager.GetActiveScene().name == "Forge 2" ||
+            SceneManager.GetActiveScene().name == "Forge Level 3")
         {
             if (other.CompareTag(ingredientTag) && coalInFurnace)
             {
                 GameObject ingredientObj = other.gameObject;
-                Debug.Log("Ingredient " +  ingredientObj.name + " added");
+
+                // Only add the ingredient if it’s not already in the list
                 if (!ingredientsList.Contains(ingredientObj))
                 {
                     ingredientsList.Add(ingredientObj);
 
+                    // Activate the object once enough ingredients are collected
                     if (ingredientsList.Count >= 6)
                     {
                         ActiveObj();
-                        Debug.Log("Bar Spawned");
                     }
                 }
 
@@ -79,12 +83,12 @@ public class Combine : MonoBehaviour
         }
     }
 
+    //If object leaves collider, remove it from the ingredient list
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(ingredientTag))
         {
             ingredientsList.Remove(other.gameObject);
-            Debug.Log("Removed: " + other.gameObject.name);
         }
     }
 }

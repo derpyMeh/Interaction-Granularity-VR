@@ -18,9 +18,10 @@ public class IngredientEnabler : MonoBehaviour
 
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
+        //Ensures several important objects arent destroyed when a new scene loads. 
+        //Runs on Awake instead of start since bootStrap runs on Awake.
         DontDestroyOnLoad(this.gameObject);
         DontDestroyOnLoad(xrOrig);
         DontDestroyOnLoad(xrIntMan);
@@ -32,14 +33,22 @@ public class IngredientEnabler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Only run this logic if:
+        //The current scene is "Forge 2"
+        //There are ingredients stored in the ingredient list
+        //Fewer than or equal to 6 ingredients have been added to the allIngredientList
         if (SceneManager.GetActiveScene().name == "Forge 2" && ingredientListNames.Count > 0 && allIngredientList.Count <= 6)
         {
+            // Get the current scene reference
             Scene currentScene = SceneManager.GetActiveScene();
-            Debug.Log("In " + SceneManager.GetActiveScene().name + "And Found " + ingredientListNames.Count + "Ingredients");
+
+            // Get ALL GameObjects in the project, including inactive ones
             GameObject[] allIngredients = Resources.FindObjectsOfTypeAll<GameObject>();
 
-            Debug.Log("Found " + allIngredients.Length + " amount of ingredients");
+            //Filter the GameObjects:
+            //Must belong to the current scene
+            //Must be tagged as "Ingredient"
+            //If they are, add them to the ingredient list  
             foreach (GameObject go in allIngredients)
             {
                 if (go.scene == currentScene && go.CompareTag("Ingredient"))
@@ -48,14 +57,16 @@ public class IngredientEnabler : MonoBehaviour
                 }
             }
 
+            //Clear the allIngredients array manually to free up memory
             for (int i = 0; i < allIngredients.Length; i++)
             {
                 allIngredients[i] = null;
             }
 
+            //Loop through ingredients that belong to the scene
             foreach (GameObject obj in allIngredientList)
             {
-                Debug.Log("Found " + obj.name);
+                //If the object is in the saved ingredient list and is currently inactive, activate it
                 if (ingredientListNames.Contains(obj.name) && !obj.activeSelf)
                 {
                     obj.SetActive(true);
@@ -67,29 +78,37 @@ public class IngredientEnabler : MonoBehaviour
 
     private void OnEnable()
     {
+        //Subscribe to the selectEntered event so that OnGrab is called when an object is grabbed
+        //This will call OnGrab() whenever an interactable is grabbed
         Interactor.selectEntered.AddListener(OnGrab);
     }
 
     private void OnDisable()
     {
+        //Unsubscribe from the selectEntered event to avoid memory leaks or unexpected behavior
         Interactor.selectEntered.RemoveListener(OnGrab);
     }
 
+    //Called when an interactable object is grabbed
     private void OnGrab(SelectEnterEventArgs args)
     {
-        //string grabbedObjName = args.interactableObject.transform.gameObject.name;
+        //Get the GameObject that was grabbed
         GameObject grabbedObj = args.interactableObject.transform.gameObject;
 
+        //Check if the grabbed object is tagged as "Ingredient" and currently in the correct scene
         if (grabbedObj.CompareTag("Ingredient") && SceneManager.GetActiveScene().name == "Ingredients world")
         {
-            
+            //Check if the object hasn't already been added to the list
             if (!ingredientListNames.Contains(grabbedObj.name))
             {
+                //Move the particle effect to the grabbed object's position and play it
                 poofObj.transform.position = grabbedObj.transform.position;
                 poofParticle.Play();
-                ingredientListNames.Add(grabbedObj.name);
-                Debug.Log("Added " + grabbedObj.name + "to list");
 
+                //Add the ingredient's name to the tracking list
+                ingredientListNames.Add(grabbedObj.name);
+
+                // Deactivate the object after picking it up (if it's still active)
                 if (!grabbedObj.activeInHierarchy == false)
                 {   
                     grabbedObj.SetActive(false);

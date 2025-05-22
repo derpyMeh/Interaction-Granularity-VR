@@ -5,12 +5,13 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ChainPickUp : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     public XRGrabInteractable chainInteractable;
 
 
     void Start()
     {
+
+        // Add an event listener so that when it's picked up (selected), onChainPickup is called
         if (chainInteractable != null)
         {
             chainInteractable.selectEntered.AddListener(OnChainPickup);
@@ -19,6 +20,7 @@ public class ChainPickUp : MonoBehaviour
 
     private void OnChainPickup(SelectEnterEventArgs args)
     {
+        //When chain is pickeded up, begins fading out and load into outroscene
         CameraEffectController cam = FindObjectOfType<CameraEffectController>();
         if (cam != null)
         {

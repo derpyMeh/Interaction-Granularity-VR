@@ -32,22 +32,16 @@ public class HammeringSecond : MonoBehaviour
     void Start()
     {
         lastPosition = hammerObj.transform.position;
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
+        //If barLogic doesn't exist, look for it on the ingotObject
         if (barLogic == null)
         {
             barLogic = ingotObj.GetComponent<BarLogic>();
             ingotObj = GameObject.Find("The Bar");
-
-            //if (ingotObj != null && ingotObj.activeInHierarchy)
-            //{
-            //    barLogic = ingotObj.GetComponent<BarLogic>();
-            //}
         }
 
         
@@ -59,24 +53,34 @@ public class HammeringSecond : MonoBehaviour
         // Update the last position for the next frame
         lastPosition = hammerObj.transform.position;
 
-        // Only trigger if velocity exceeds threshold
+        //Check if all swing conditions are met: 
+        //player hasn't swung yet,
+        //swing velocity is high enough,
+        //the bar has enough heat,
+        //the ingot is placed,
+        //and the hammer is inside the trigger zone
         if (!hasSwung && velocity >= velocityThreshold && barLogic.barHeat > 0.2 && ingotPlaced && hammerInside)
         {
-            Debug.Log("Player Swung");
+            //Increment hit counter
             hitThresh++;
+
+            //Play clink audio and spark effect to emulate hammerstrike on metal
             sparkEffect.Play();
             clinkAudio.Play();
+
+            //Set hasSwung to true, and start the swing cooldown
             hasSwung = true;
             lastSwingTime = swingCd;
 
+            //If the play has correctly hit the bar 5 times, call the ForgeTest method.
             if (hitThresh >= 5)
             {
                 ForgeTest();
-                hitThresh = 0;
 
             }
         }
 
+        //If hasSwung is true, start the logic for the cooldown on a swing.
         if (hasSwung)
         {
             lastSwingTime -= Time.deltaTime;
@@ -90,19 +94,22 @@ public class HammeringSecond : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //If the object has the ingot tag and is an XR Grab Interactable, place it in the slot.
         if (other.CompareTag(ingotTag) && other.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>() != null)
         {
             PlaceInSlot(other.transform);
-            Debug.Log("placed slot");
         }
+
+        //If the object is tagged as a hammer, mark that the hammer is inside the trigger zone
         if (other.CompareTag(hammerTag))
         {
             hammerInside = true;
         }
+
+        //If the object has the Ingot tag, mark it as placed
         if (other.CompareTag(ingotTag))
         {
             ingotPlaced = true;
-            Debug.Log("Ingot Placed");
         }
 
 
@@ -125,26 +132,23 @@ public class HammeringSecond : MonoBehaviour
     {
         Rigidbody objectRigidbody = objectTransform.GetComponent<Rigidbody>();
 
-        // Stop the object from moving freely once placed in the slot
+        //Stop the object from moving freely once placed in the slot
         if (objectRigidbody != null)
         {
             objectRigidbody.isKinematic = true; // Disable physics
         }
 
-        // Snap the object into the slot position
+        //Snap the object into the slot position
         objectTransform.position = slotPosition.position;
-        objectTransform.rotation = slotPosition.rotation; // Optional: align rotation as well
-
-   
     }
     private void ForgeTest()
     {
-        
+
+        //If ingot and hammer are inside, set the chain object as active and destroy the ingot object
         if (ingotPlaced && hammerInside)
         {
             chainObj.SetActive(true);
             Destroy(ingotObj);
-            Debug.Log("Chain Spawned");
         }
 
     }

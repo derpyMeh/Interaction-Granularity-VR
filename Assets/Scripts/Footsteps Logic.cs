@@ -11,6 +11,7 @@ public class FootstepsLogic : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        //sets the start position of the player
         lastPosition = playerObj.transform.position;
     }
 
@@ -19,7 +20,7 @@ public class FootstepsLogic : MonoBehaviour
     {
         Vector3 deltaPosition = playerObj.transform.position - lastPosition;
 
-        // Calculate the velocity (change in position over time)
+        // Calculate the velocity 
         float velocity = deltaPosition.magnitude / Time.deltaTime;
 
         // Update the last position for the next frame
@@ -28,12 +29,14 @@ public class FootstepsLogic : MonoBehaviour
         {
             footstepTimer -= Time.deltaTime;
 
+            //footstep sound plays whenever the player
             if (footstepTimer <= 0f)
             {
                 footstepSource.Play();
                 footstepTimer = footstepInterval;
             }
         }
+        //Stop footstep sound if player isn't moving.
         else
         {
             footstepSource.Stop();

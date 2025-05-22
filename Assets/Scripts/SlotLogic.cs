@@ -6,18 +6,7 @@ public class SlotLogic : MonoBehaviour
     public Transform slotPosition; // The position where the object should be placed
     public string ingotTag = "Ingot"; // Tag to check if the object is allowed to be placed
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+   
     private void OnTriggerEnter(Collider other)
     {
         // Check if the object has the correct tag and is interactable

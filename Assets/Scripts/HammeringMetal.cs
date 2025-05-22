@@ -2,10 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
-using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 
 public class HammeringMetal : MonoBehaviour
@@ -47,39 +44,40 @@ public class HammeringMetal : MonoBehaviour
         // Update the last position for the next frame
         lastPosition = hammerObj.transform.position;
 
-        // Only trigger if velocity exceeds threshold
+        // Only call ForgeTest method if velocity exceeds threshold and both the ingot and hammer are inside the collider (IngotPlaced and HammerInside are true)
         if (velocity >= velocityThreshold && ingotPlaced && hammerInside)
         {
             ForgeTest();
-            // Hammer is swinging with sufficient velocity
-            Debug.Log("Swing detected with velocity: " + velocity);
         }
 
        
     }
 
+
+    //
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(ingotTag) && other.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>() != null)
+        // If the object has the ingot tag and is an XR Grab Interactable, place it in the slot
+        if (other.CompareTag(ingotTag) && other.GetComponent<XRGrabInteractable>() != null)
         {
             PlaceInSlot(other.transform);
-            Debug.Log("placed slot");
         }
+
+        // If the object is tagged as a hammer, mark that the hammer is inside the trigger zone
         if (other.CompareTag(hammerTag))
         {
             hammerInside = true;
         }
+
+        // If the object has the Ingot tag, mark it as placed
         if (other.CompareTag(ingotTag))
         {
             ingotPlaced = true;
-            Debug.Log("Ingot Placed");
         }
-
-
     }
 
     
-
+    //Similar to previous just reversed for removal of the objects 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag(hammerTag))
@@ -97,8 +95,8 @@ public class HammeringMetal : MonoBehaviour
 
     private void PlaceInSlot(Transform objectTransform)
     {
-        // Optionally disable the physics and interactions for the object when placed
-        UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable grabInteractable = objectTransform.GetComponent<UnityEngine.XR.Interaction.Toolkit.Interactables.XRGrabInteractable>();
+        //Disable the physics and interactions for the object when placed
+        XRGrabInteractable grabInteractable = objectTransform.GetComponent<XRGrabInteractable>();
         Rigidbody objectRigidbody = objectTransform.GetComponent<Rigidbody>();
 
         // Stop the object from moving freely once placed in the slot
@@ -109,23 +107,16 @@ public class HammeringMetal : MonoBehaviour
 
         // Snap the object into the slot position
         objectTransform.position = slotPosition.position;
-        objectTransform.rotation = slotPosition.rotation; // Optional: align rotation as well
 
-        // Optionally disable interaction after placement
-        if (grabInteractable != null)
-        {
-            // Set the interaction layers to nothing (disable interaction)
-            grabInteractable.interactionLayers = 0;
-        } // Disable interaction
+      
     }
     private void ForgeTest()
     {
-        
+        //If ingot and hammer are inside, set the chain object as active and destroy the ingot object
         if (ingotPlaced && hammerInside)
         {
             chainObj.SetActive(true);
             Destroy(ingotObj);
-            Debug.Log("Chain Spawned");
         }
 
     }

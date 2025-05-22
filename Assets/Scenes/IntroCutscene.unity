@@ -1459,7 +1459,7 @@ MonoBehaviour:
   level1Scene: {fileID: 102900000, guid: 91f41a7d648b430408131a5ad8d2a3c4, type: 3}
   level2Scene: {fileID: 102900000, guid: 51deddb6ed1113745be2028c245a1f1b, type: 3}
   level3Scene: {fileID: 102900000, guid: a7adbeadd54bd1d449648f85872cc296, type: 3}
-  firstLevel: 2
+  firstLevel: 1
 --- !u!1001 &1839426425
 PrefabInstance:
   m_ObjectHideFlags: 0
