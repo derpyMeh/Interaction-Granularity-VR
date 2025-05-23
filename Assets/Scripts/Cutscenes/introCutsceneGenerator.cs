@@ -5,15 +5,15 @@ using System.Collections.Generic;
 [CustomEditor(typeof(introCutsceneController))]
 public class introCutsceneGenerator : Editor
 {
-    public override void OnInspectorGUI()
+    public override void OnInspectorGUI() // Overrides Unity's default inspector GUI for this script
     {
-        DrawDefaultInspector();
+        DrawDefaultInspector(); // Draw default fields for the controller
 
-        introCutsceneController controller = (introCutsceneController)target;
+        introCutsceneController controller = (introCutsceneController)target; // Cast target to the actual script type we're modifying
 
-        if (GUILayout.Button("Auto-Fill Subtitles from Float Timestamps"))
+        if (GUILayout.Button("Auto-Fill Subtitles from Float Timestamps")) // Button: Auto-fill subtitles
         {
-            var subtitles = new List<(float time, string text)>
+            var subtitles = new List<(float time, string text)> // List of subtitle cues with timestamp and subtitle text
             {
                 (0f, "Loki, the trickster god, had three monstrous children"),
                 (4f, "with the giantess Angrboda:"),
@@ -58,7 +58,7 @@ public class introCutsceneGenerator : Editor
                 (141f, "and bring it together in the dwarven forge.")
             };
 
-            var cues = new List<introCutsceneController.SubtitleCue>();
+            var cues = new List<introCutsceneController.SubtitleCue>();  // Convert to list of SubtitleCue objects
             foreach (var (time, text) in subtitles)
             {
                 cues.Add(new introCutsceneController.SubtitleCue
@@ -67,17 +67,17 @@ public class introCutsceneGenerator : Editor
                     subtitle = text
                 });
             }
-
+            // Assign to controller and mark as modified
             controller.subtitleCues = cues;
             EditorUtility.SetDirty(controller);
             Debug.Log($"Loaded {cues.Count} subtitle cues.");
         }
-
+        // Button: Auto-fill image cues based on timestamps
         if (GUILayout.Button("Auto-Fill Image Cues"))
         {
             float[] timestamps = new float[]
             {
-                0f, //1
+                0f, // Image 1
                 14f, //2
                 18f, //3
                 30f, //4
@@ -92,14 +92,16 @@ public class introCutsceneGenerator : Editor
                 128f //13
             };
 
-            string basePath = "Assets/Sounds/Voiceover/Images/Intro";
+            string basePath = "Assets/Sounds/Voiceover/Images/Intro"; // Folder path to image assets
             var imageCues = new List<introCutsceneController.ImageCue>();
 
             for (int i = 0; i < timestamps.Length; i++)
             {
+                // Use the last image (13) as fallback for anything beyond index 11
                 string imageFile = (i >= 12) ? "img_13.png" : $"img_{i + 1}.png";
                 string path = $"{basePath}/{imageFile}";
-                Sprite image = AssetDatabase.LoadAssetAtPath<Sprite>(path);
+
+                Sprite image = AssetDatabase.LoadAssetAtPath<Sprite>(path); // Load image asset from path
 
                 if (image == null)
                     Debug.LogWarning($"Could not find image at: {path}");
@@ -111,6 +113,7 @@ public class introCutsceneGenerator : Editor
                 });
             }
 
+            // Assign image cues and mark object as dirty (needs save)
             controller.imageCues = imageCues;
             EditorUtility.SetDirty(controller);
             Debug.Log($"Loaded {imageCues.Count} image cues.");
